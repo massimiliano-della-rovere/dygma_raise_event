@@ -37,8 +37,18 @@ if __name__ == "__main__":
     # print(dygma_raise.keymap_default)
     # print(dygma_raise.keymap_only_custom)
 
+    # print(dygma_raise.hardware_crc_errors)
+    # print(dygma_raise.hardware_firmware)
     # print(dygma_raise.hardware_joint)
+    # print(dygma_raise.hardware_keyscan)
     # print(dygma_raise.hardware_layout)
+    # print(dygma_raise.hardware_side_power)
+    # print(dygma_raise.hardware_side_ver)
+    # print(dygma_raise.hardware_sled_ver)
+    # print(dygma_raise.hardware_sled_current)
+    # print(dygma_raise.hardware_version)
+
+    print(dygma_raise.help)
 
     # old_value = dygma_raise.idleleds_time_limit
     # dygma_raise.idleleds_time_limit = 900
@@ -69,6 +79,9 @@ if __name__ == "__main__":
     # input()
     # dygma_raise.led_theme = old_value
 
+    # print(dygma_raise.macros_map)
+    # dygma_raise.macros_map = ?
+
     # old_value = dygma_raise.palette
     # new_value = old_value.copy()
     # new_value[14] = RGBColor(255, 255, 255)
@@ -80,5 +93,7 @@ if __name__ == "__main__":
     # print(dygma_raise.settings_default_layer)
     # print(dygma_raise.settings_valid)
     # print(dygma_raise.settings_version)
+
+    # print(dygma_raise.tapdance_map)
 
     # print(dygma_raise.version)

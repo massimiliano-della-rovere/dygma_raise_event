@@ -11,8 +11,18 @@ from descriptor import (
     EEPROMContents,
     EEPROMFree,
 
+    HardwareCRCErrors,
+    HardwareFirmware,
     HardwareJoint,
+    HardwareKeyscan,
     HardwareLayout,
+    HardwareSidePower,
+    HardwareSideVer,
+    HardwareSledCurrent,
+    HardwareSledVer,
+    HardwareVersion,
+
+    Help,
 
     IdleledsTimeLimit,
 
@@ -26,13 +36,20 @@ from descriptor import (
     LedSetAll,
     LedTheme,
 
+    MacrosMap,
+    MacrosTrigger,
+
     Palette,
 
     SettingsCRC,
     SettingsDefaultLayer,
     SettingsValid,
     SettingsVersion,
-    Version, VersionType)
+
+    TapdanceMap,
+
+    Version,
+    VersionType)
 
 
 class DygmaRaiseLedAtMeta(type):
@@ -46,7 +63,7 @@ class DygmaRaiseLedAtMeta(type):
 
 class DygmaRaise(metaclass=DygmaRaiseLedAtMeta):
     def __new__(cls, *args, **kwargs):
-        return cls(*args, **kwargs)
+        return super().__new__(cls)
 
     def __init__(self, device="/dev/ttyACM0", log_level=logging.INFO):
         self._device = device
@@ -59,8 +76,18 @@ class DygmaRaise(metaclass=DygmaRaiseLedAtMeta):
     eeprom_contents = EEPROMContents()
     eeprom_free = EEPROMFree()
 
+    hardware_crc_errors = HardwareCRCErrors()
+    hardware_firmware = HardwareFirmware()
     hardware_joint = HardwareJoint()
+    hardware_keyscan = HardwareKeyscan()
     hardware_layout = HardwareLayout()
+    hardware_side_power = HardwareSidePower()
+    hardware_side_ver = HardwareSideVer()
+    hardware_sled_current = HardwareSledCurrent()
+    hardware_sled_ver = HardwareSledVer()
+    hardware_version = HardwareVersion()
+
+    help = Help()
 
     idleleds_time_limit = IdleledsTimeLimit()
 
@@ -74,12 +101,17 @@ class DygmaRaise(metaclass=DygmaRaiseLedAtMeta):
     led_set_all = LedSetAll()
     led_theme = LedTheme()
 
+    macros_map = MacrosMap()
+    macros_trigger = MacrosTrigger()
+
     palette = Palette()
 
     settings_crc = SettingsCRC()
     settings_default_layer = SettingsDefaultLayer()
     settings_valid = SettingsValid()
     settings_version = SettingsVersion()
+
+    tapdance_map = TapdanceMap()
 
     version: VersionType = Version()
 

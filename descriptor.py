@@ -139,6 +139,18 @@ class EEPROMFree(DygmaRaiseBaseDescriptor):
         return int(received_text)
 
 
+class HardwareCRCErrors(DygmaRaiseBaseDescriptor):
+    @property
+    def command(self) -> bytes:
+        return b"hardware.crc_errors"
+
+
+class HardwareFirmware(DygmaRaiseBaseDescriptor):
+    @property
+    def command(self) -> bytes:
+        return b"hardware.firmware"
+
+
 class HardwareJoint(DygmaRaiseBaseDescriptor):
     @property
     def command(self) -> bytes:
@@ -149,10 +161,60 @@ class HardwareJoint(DygmaRaiseBaseDescriptor):
         return int(received_text)
 
 
+class HardwareKeyscan(DygmaRaiseBaseDescriptor):
+    @property
+    def command(self) -> bytes:
+        return b"hardware.keyscan"
+
+    @staticmethod
+    def output_cast(received_text: str, dr: DygmaRaise) -> int:
+        return int(received_text)
+
+
 class HardwareLayout(DygmaRaiseBaseDescriptor):
     @property
     def command(self) -> bytes:
         return b"hardware.layout"
+
+
+class HardwareSidePower(DygmaRaiseBaseDescriptor):
+    @property
+    def command(self) -> bytes:
+        return b"hardware.side_power"
+
+    @staticmethod
+    def output_cast(received_text: str, dr: DygmaRaise) -> int:
+        return int(received_text)
+
+
+class HardwareSideVer(DygmaRaiseBaseDescriptor):
+    @property
+    def command(self) -> bytes:
+        return b"hardware.side_ver"
+
+
+class HardwareSledCurrent(DygmaRaiseBaseDescriptor):
+    @property
+    def command(self) -> bytes:
+        return b"hardware.sled_current"
+
+
+class HardwareSledVer(DygmaRaiseBaseDescriptor):
+    @property
+    def command(self) -> bytes:
+        return b"hardware.sled_ver"
+
+
+class HardwareVersion(DygmaRaiseBaseDescriptor):
+    @property
+    def command(self) -> bytes:
+        return b"hardware.version"
+
+
+class Help(DygmaRaiseBaseDescriptor):
+    @property
+    def command(self) -> bytes:
+        return b"help"
 
 
 class IdleledsTimeLimit(DygmaRaiseBaseDescriptor):
@@ -212,7 +274,7 @@ class LedAt(DygmaRaiseBaseDescriptor):
     def __set_name__(self, owner, name):
         super().__set_name__(owner, name)
         led_id = int(name.rsplit("_", 1)[1])
-        if 0 <= led_id <= 130:
+        if 0 <= led_id < LEDS_QUANTITY:
             self._led_id = led_id
         else:
             raise ValueError("led_id")
@@ -284,6 +346,25 @@ class LedTheme(DygmaRaiseBaseDescriptor):
         next(self._io(dr, set_command_args=value.render_for_command()))
 
 
+class MacrosMap(DygmaRaiseBaseDescriptor):
+    # TODO: Macros Map class
+    @property
+    def command(self) -> bytes:
+        return b"macros.map"
+
+
+class MacrosTrigger(DygmaRaiseBaseDescriptor):
+    @property
+    def command(self) -> bytes:
+        return b"macros.trigger"
+
+    def __get__(self, dr: DygmaRaise, objtype=None) -> typing.Any:
+        raise TypeError
+
+    def __set__(self, dr: DygmaRaise, value: int) -> None:
+        next(self._io(dr, set_command_args=str(value).encode(CHARSET)))
+
+
 class Palette(DygmaRaiseBaseDescriptor):
     @property
     def command(self) -> bytes:
@@ -342,6 +423,12 @@ class SettingsVersion(DygmaRaiseBaseDescriptor):
 
     def __set__(self, instance: DygmaRaise, value: int) -> int:
         raise NotImplementedError
+
+
+class TapdanceMap(DygmaRaiseBaseDescriptor):
+    @property
+    def command(self) -> bytes:
+        return b"tapdance.map"
 
 
 class Version(DygmaRaiseBaseDescriptor):
