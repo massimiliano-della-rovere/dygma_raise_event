@@ -1,4 +1,10 @@
-"""Descriptors for the Dygma Raise class."""
+"""
+Descriptors for the Dygma Raise class.
+
+API: https://github.com/Dygmalab/Bazecor/blob/development/FOCUS_API.md
+KEY ID MAP: https://github.com/Dygmalab/Raise-Firmware/blob/master/FOCUS_API.MD
+reddit: https://www.reddit.com/r/DygmaLab/comments/lsy4y1/api_documentation/
+"""
 
 
 from __future__ import annotations
