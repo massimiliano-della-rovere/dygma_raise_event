@@ -5,12 +5,12 @@ reddit: https://www.reddit.com/r/DygmaLab/comments/lsy4y1/api_documentation/
 """
 
 
-import copy
+# import copy
 import logging
 
 
 from dygma_raise import DygmaRaise
-from descriptor import IndexedColor, LedEffect, RGBColor
+# from descriptor import IndexedColor, LedEffect, RGBColor
 
 
 if __name__ == "__main__":
