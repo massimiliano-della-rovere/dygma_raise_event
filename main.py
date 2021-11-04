@@ -14,6 +14,10 @@ from dygma_raise import DygmaRaise
 
 
 if __name__ == "__main__":
+    # here you can call DygmaRaise.get_serial_ports_with_dygma_raise()
+    # to get a tuple of ports connected to a Dygma Raise.
+    # The port.device attribute can be passed to the
+    # DygmaRaise __new__() / __init__() device= parameter.
     dygma_raise = DygmaRaise(log_level=logging.DEBUG)
 
     # old_value = dygma_raise.colormap_map

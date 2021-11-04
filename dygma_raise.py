@@ -5,6 +5,10 @@ import sys
 import logging
 
 
+from serial.tools.list_ports import comports as list_serial_ports
+from serial.tools.list_ports_common import ListPortInfo
+
+
 from descriptor import (
     ColormapMap,
 
@@ -52,6 +56,12 @@ from descriptor import (
     VersionType)
 
 
+# this is port.vid and pairs with port.manufactorer == "Dygma"
+DYGMA_VENDOR_ID = 0x1209
+# this is port.pid and pairs with port.product == "Raise"
+RAISE_PRODUCT_ID = 0x2201
+
+
 class DygmaRaiseLedAtMeta(type):
     @classmethod
     def __prepare__(mcs, name, bases, **kwargs):
@@ -65,8 +75,18 @@ class DygmaRaise(metaclass=DygmaRaiseLedAtMeta):
     def __new__(cls, *args, **kwargs):
         return super().__new__(cls)
 
-    def __init__(self, device="/dev/ttyACM0", log_level=logging.INFO):
-        self._device = device
+    @staticmethod
+    def get_serial_ports_with_dygma_raise() -> tuple[ListPortInfo, ...]:
+        return tuple(
+            port
+            for port in list_serial_ports()
+            if port.vid == DYGMA_VENDOR_ID and port.pid == RAISE_PRODUCT_ID)
+
+    def __init__(self, device=None, log_level=logging.INFO):
+        if device:
+            self._device = device
+        else:
+            self._device = next(self.get_serial_ports_with_dygma_raise()).device
         self.logger = logging.getLogger("dygma_raise")
         self.logger.setLevel(log_level)
         self.logger.addHandler(logging.StreamHandler(sys.stdout))
