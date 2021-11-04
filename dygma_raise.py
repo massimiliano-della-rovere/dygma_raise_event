@@ -86,7 +86,7 @@ class DygmaRaise(metaclass=DygmaRaiseLedAtMeta):
         if device:
             self._device = device
         else:
-            self._device = next(self.get_serial_ports_with_dygma_raise()).device
+            self._device = self.get_serial_ports_with_dygma_raise()[0].device
         self.logger = logging.getLogger("dygma_raise")
         self.logger.setLevel(log_level)
         self.logger.addHandler(logging.StreamHandler(sys.stdout))
