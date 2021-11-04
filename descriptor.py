@@ -236,7 +236,7 @@ class KeymapCustom(DygmaRaiseBaseDescriptor):
         return b"keymap.custom"
 
     def output_cast(self, received_text: str, dr: DygmaRaise) -> Layers:
-        return tuple(self._extract_keymap_layers(received_text))
+        return self._extract_keymap_layers(received_text)
 
     def __set__(self, dr: DygmaRaise, value: Layers):
         next(self._io(dr, set_command_args=str(value).encode(CHARSET)))
@@ -248,7 +248,7 @@ class KeymapDefault(DygmaRaiseBaseDescriptor):
         return b"keymap.default"
 
     def output_cast(self, received_text: str) -> Layers:
-        return tuple(self._extract_keymap_layers(received_text))
+        return self._extract_keymap_layers(received_text)
 
     def __set__(self, instance: DygmaRaise, value: tuple[int]):
         raise NotImplementedError
