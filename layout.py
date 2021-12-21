@@ -171,14 +171,14 @@ class LedLayout(Layout):
             for side, side_offsets in left_right_offsets.items():
                 for column, offset in enumerate(side_offsets):
                     if side is Side.NEURON:
-                        position = LedPosition.neuron
+                        position = LedPosition.NEURON
                         is_key = False
                     else:
                         if row < base_index:
-                            position = LedPosition.key
+                            position = LedPosition.KEY
                             is_key = True
                         else:
-                            position = LedPosition.base
+                            position = LedPosition.BASE
                             is_key = False
                     layout[offset] = LedCoordinates(
                         keyboard_layout=keyboard_layout,
