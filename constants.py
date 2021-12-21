@@ -1,6 +1,12 @@
 import enum
 
 
+"""
+TODO: import constants:
+https://github.com/Dygmalab/Bazecor/tree/development/src/api/keymap/db
+"""
+
+
 CHARSET = "ascii"
 
 
