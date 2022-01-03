@@ -42,3 +42,17 @@ class Side(enum.Enum):
     LEFT = "left"
     RIGHT = "right"
     NEURON = "neuron"
+
+
+class MacroCode(enum.IntEnum):
+    END = 0  # 1-byte payload
+    DELAY = 2  # 2-bytes payload
+    FUNCTION_KEY_PRESS = 3  # 1-byte payload
+    FUNCTION_KEY_RELEASE = 4  # 1-byte payload
+    FUNCTION_KEY_PRESS_RELEASE = 5  # 1-byte payload
+    KEY_CODE_PRESS = 6  # 1-byte payload
+    KEY_CODE_RELEASE = 7  # 1-byte payload
+    KEY_CODE_PRESS_RELEASE = 8  # 1-byte payload
+
+
+MACRO_VALUES = tuple(v.value for v in MacroCode.__members__.values())

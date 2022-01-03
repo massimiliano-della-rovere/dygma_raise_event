@@ -9,8 +9,10 @@ reddit: https://www.reddit.com/r/DygmaLab/comments/lsy4y1/api_documentation/
 import logging
 
 
+# from auxilary_types import Macro, MacroCode, MacroItem
 from dygma_raise import DygmaRaise
 # from descriptor import IndexedColor, LedEffect, RGBColor
+# from keycodes import KEY_CODES
 
 
 if __name__ == "__main__":
@@ -58,6 +60,9 @@ if __name__ == "__main__":
     # dygma_raise.idleleds_time_limit = 900
     # dygma_raise.idleleds_time_limit = old_value
 
+    # dygma_raise.layer_activate = 4
+    # print(dygma_raise.layer_state)
+
     # noinspection PyUnresolvedReferences
     # old_value = dygma_raise.led_at_0
     # print(old_value)
@@ -83,8 +88,15 @@ if __name__ == "__main__":
     # input()
     # dygma_raise.led_theme = old_value
 
-    # print(dygma_raise.macros_map)
-    # dygma_raise.macros_map = ?
+    # print(*dygma_raise.macros_map, sep="\n")
+    # dygma_raise.macros_map = (
+    #     Macro((MacroItem(macro_code=MacroCode.DELAY, value=500),)),
+    #     Macro((
+    #         MacroItem(
+    #             macro_code=MacroCode.KEY_CODE_PRESS_RELEASE,
+    #             value=KeyDefinition(
+    #                 code=25,
+    #                 label=KeyLabel(top='', primary='V', verbose=''))),)))
 
     # old_value = dygma_raise.palette
     # new_value = old_value.copy()
@@ -98,6 +110,15 @@ if __name__ == "__main__":
     # print(dygma_raise.settings_valid)
     # print(dygma_raise.settings_version)
 
+    # print(dygma_raise.superkeys_holdstart)
+    # print(dygma_raise.superkeys_map)
+    # print(dygma_raise.superkeys_overlap)
+    # print(dygma_raise.superkeys_repeat)
+    # print(dygma_raise.superkeys_timeout)
+    # print(dygma_raise.superkeys_wait_for)
+
     # print(dygma_raise.tapdance_map)
 
     # print(dygma_raise.version)
+
+    # print(KEY_CODES)

@@ -34,6 +34,8 @@ from descriptor import (
     KeymapDefault,
     KeymapOnlyCustom,
 
+    LayerActivate, LayerState,
+
     LedAt,
     LedBrightness,
     LedMode,
@@ -49,6 +51,13 @@ from descriptor import (
     SettingsDefaultLayer,
     SettingsValid,
     SettingsVersion,
+
+    SuperkeysHoldstart,
+    SuperkeysMap,
+    SuperkeysOverlap,
+    SuperkeysRepeat,
+    SuperkeysTimeout,
+    SuperkeysWaitFor,
 
     TapdanceMap,
 
@@ -115,6 +124,9 @@ class DygmaRaise(metaclass=DygmaRaiseLedAtMeta):
     keymap_default = KeymapDefault()
     keymap_only_custom = KeymapOnlyCustom()
 
+    layer_activate = LayerActivate()
+    layer_state = LayerState()
+
     # the led_at_* are defined by the DygmaRaiseLedAtMeta metaclass
     led_brightness = LedBrightness()
     led_mode = LedMode()
@@ -130,6 +142,13 @@ class DygmaRaise(metaclass=DygmaRaiseLedAtMeta):
     settings_default_layer = SettingsDefaultLayer()
     settings_valid = SettingsValid()
     settings_version = SettingsVersion()
+
+    superkeys_holdstart = SuperkeysHoldstart()
+    superkeys_map = SuperkeysMap()
+    superkeys_overlap = SuperkeysOverlap()
+    superkeys_repeat = SuperkeysRepeat()
+    superkeys_timeout = SuperkeysTimeout()
+    superkeys_wait_for = SuperkeysWaitFor()
 
     tapdance_map = TapdanceMap()
 

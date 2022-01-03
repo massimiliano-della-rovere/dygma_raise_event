@@ -9,7 +9,8 @@ import typing
 
 from constants import (
     CHARSET, LAYERS_CUSTOM_QUANTITY, KeyboardLayout,
-    LedPosition, LEDS_QUANTITY, PALETTE_SIZE, Side)
+    LedPosition, LEDS_QUANTITY, MacroCode, PALETTE_SIZE, Side)
+from keycodes.key import KeyDefinition
 
 
 class IndexedColor(int):
@@ -156,7 +157,10 @@ class Layers:
         self._layers[key] = T
 
     def __str__(self) -> str:
-        return str(self._layers)
+        return f"{type(self).__name__}({self._layers!s})"
+
+    def __repr__(self) -> str:
+        return f"{type(self).__name__}({self._layers!r})"
 
     def __copy__(self) -> Layers:
         return type(self)(copy.copy(self._layers))
@@ -183,6 +187,57 @@ class LedLayout(ColorSet):
     @property
     def size(self) -> int:
         return LEDS_QUANTITY
+
+
+class MacroItem(typing.NamedTuple):
+    macro_code: MacroCode
+    value: int | KeyDefinition
+
+    def render_for_command(self) -> bytes:
+        if self.macro_code == MacroCode.DELAY:
+            value = f"{self.value >> 8} {self.value & 0xFF}"
+        else:
+            value = self.value
+        return f"{self.macro_code.value} {value}".encode(CHARSET)
+
+
+class Macro:
+    def __init__(self, macro_items: typing.Iterable[MacroItem]):
+        self._macro_items = tuple(macro_items)
+
+    def __len__(self) -> int:
+        return len(self._macro_items)
+
+    def __getitem__(self, key: int) -> T:
+        return self._macro_items[key]
+
+    def __str__(self) -> str:
+        return f"{type(self).__name__}({self._macro_items!s})"
+
+    def __repr__(self) -> str:
+        return f"{type(self).__name__}({self._macro_items!r})"
+
+    def __copy__(self) -> Macro:
+        return type(self)(copy.copy(self._macro_items))
+
+    def __deepcopy__(self, memo) -> Macro:
+        return type(self)(copy.deepcopy(self._macro_items))
+
+    def render_for_command(self) -> bytes:
+        ret = bytearray(
+            b" ".join(
+                macro_item.render_for_command()
+                for macro_item in self._macro_items))
+        ret.extend(b" 0")
+        return bytes(ret)
+
+
+class Superkey(typing.NamedTuple):
+    tap: int
+    hold: int
+    tap_hold: int
+    double_tap: int
+    double_tap_hold: int
 
 
 class VersionType(typing.NamedTuple):
