@@ -13,6 +13,7 @@ import logging
 from dygma_raise import DygmaRaise
 # from descriptor import IndexedColor, LedEffect, RGBColor
 # from keycodes import KEY_CODES
+# from keycodes.key import KeyDefinition, KeyLabel
 
 
 if __name__ == "__main__":
